@@ -174,7 +174,7 @@ The platform includes **16+ premium AI tools** across **6 categories**:
 ### 💻 Development (5 tools)
 - **Cursor AI** - AI-powered coding assistant with collaboration
 - **GitHub Copilot** - AI pair programmer for faster coding
-- **Loveable AI** - Full-stack development platform
+- **Lovable** - Full-stack development platform with React
 - **Bolt.new** - Instant web application builder
 - **Emergent AI** - Advanced AI agent platform
 
