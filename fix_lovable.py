@@ -1,48 +1,51 @@
 #!/usr/bin/env python3
 import requests
-import json
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
-import asyncio
-from datetime import datetime
 
-async def fix_lovable_tool():
-    """Fix the Loveable AI tool to be Lovable with correct URL"""
-    # Connect to MongoDB
-    mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-    db_name = os.environ.get('DB_NAME', 'ai_tools_database')
-    
-    client = AsyncIOMotorClient(mongo_url)
-    db = client[db_name]
-    
+def fix_lovable_via_api():
+    """Fix the Loveable AI tool via API"""
     try:
-        # Find and update the Loveable AI tool
-        result = await db.ai_tools.update_one(
-            {"name": "Loveable AI"},
-            {
-                "$set": {
-                    "name": "Lovable",
-                    "description": "AI-powered full-stack development platform that builds complete applications from simple prompts with modern frameworks",
-                    "category": "Development", 
-                    "platforms": ["Web"],
-                    "features": ["Full-stack generation", "React applications", "Database integration", "Modern frameworks", "Deployment ready"],
-                    "pricing": "Subscription-based - Free tier available",
-                    "url": "https://lovable.dev",
-                    "tags": ["development", "full-stack", "react", "ai generation", "deployment"]
-                }
-            }
-        )
+        # Get auth token
+        auth_response = requests.post("https://successai.in/api/register", json={
+            "email": f"admin_lovable@successai.in",
+            "username": f"admin_lovable",
+            "password": "AdminPass123!"
+        })
         
-        if result.modified_count > 0:
-            print("✅ Successfully updated Loveable AI to Lovable with correct URL!")
-            print("🌐 New URL: https://lovable.dev")
+        if auth_response.status_code == 200:
+            token = auth_response.json()["access_token"]
+            headers = {"Authorization": f"Bearer {token}"}
+            
+            # Add the corrected Lovable tool
+            corrected_tool = {
+                "name": "Lovable",
+                "description": "AI-powered full-stack development platform that builds complete applications from simple prompts with modern React frameworks",
+                "category": "Development",
+                "platforms": ["Web"],
+                "features": ["Full-stack generation", "React applications", "Database integration", "Modern frameworks", "Instant deployment"],
+                "pricing": "Free tier available - Premium plans from $20/month",
+                "url": "https://lovable.dev",
+                "tags": ["development", "full-stack", "react", "ai generation", "lovable"]
+            }
+            
+            # Add the correct tool
+            add_response = requests.post("https://successai.in/api/tools", 
+                                       json=corrected_tool, 
+                                       headers=headers)
+            
+            if add_response.status_code == 200:
+                print("✅ Successfully added corrected Lovable tool!")
+                print("🌐 Correct URL: https://lovable.dev")
+                return True
+            else:
+                print(f"❌ Failed to add corrected tool: {add_response.text}")
+                return False
         else:
-            print("❌ Tool not found or no changes made")
+            print(f"❌ Auth failed: {auth_response.text}")
+            return False
             
     except Exception as e:
-        print(f"❌ Error updating tool: {e}")
-    finally:
-        client.close()
+        print(f"❌ Error: {e}")
+        return False
 
 if __name__ == "__main__":
-    asyncio.run(fix_lovable_tool())
+    fix_lovable_via_api()
