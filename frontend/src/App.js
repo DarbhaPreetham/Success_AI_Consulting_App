@@ -955,17 +955,36 @@ const ToolsPage = () => {
         {loading ? (
           <div className="text-center py-12">
             <SparklesIcon className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
-            <p>Loading tools...</p>
+            <p className="text-gray-600">Loading AI tools...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <div className="p-6 bg-red-50 rounded-lg border border-red-200 max-w-md mx-auto">
+              <h3 className="text-lg font-semibold text-red-800 mb-2">Unable to Load Tools</h3>
+              <p className="text-red-600 mb-4">{error}</p>
+              <Button onClick={() => window.location.reload()} variant="outline">
+                Try Again
+              </Button>
+            </div>
           </div>
         ) : tools.length === 0 ? (
           <div className="text-center py-12">
             <SearchIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">No tools found matching your criteria</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No tools found</h3>
+            <p className="text-gray-600 mb-4">Try adjusting your search criteria or browse all categories</p>
+            <div className="flex gap-2 justify-center">
+              <Button onClick={() => setSearchTerm('')} variant="outline">
+                Clear Search
+              </Button>
+              <Button onClick={() => {setSelectedCategory(''); setSelectedPlatform('');}} variant="outline">
+                Clear Filters
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tools.map((tool) => (
-              <Card key={tool.id} className="hover:shadow-lg transition-shadow duration-200">
+              <Card key={tool.id} className="hover:shadow-lg transition-shadow duration-200 tool-card">
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -978,16 +997,18 @@ const ToolsPage = () => {
                         <Badge variant="outline">{tool.category}</Badge>
                       </div>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleFavorite(tool.id)}
-                      className="text-gray-400 hover:text-red-500"
-                    >
-                      <HeartIcon
-                        className={`w-4 h-4 ${favorites.has(tool.id) ? 'fill-current text-red-500' : ''}`}
-                      />
-                    </Button>
+                    {user && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleFavorite(tool.id)}
+                        className="text-gray-400 hover:text-red-500"
+                      >
+                        <HeartIcon
+                          className={`w-4 h-4 ${favorites.has(tool.id) ? 'fill-current text-red-500' : ''}`}
+                        />
+                      </Button>
+                    )}
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
@@ -999,7 +1020,7 @@ const ToolsPage = () => {
                     <div>
                       <p className="text-xs font-medium text-gray-900 mb-1">Platforms</p>
                       <div className="flex flex-wrap gap-1">
-                        {tool.platforms.map((platform) => (
+                        {(tool.platforms || []).map((platform) => (
                           <Badge key={platform} variant="secondary" className="text-xs">
                             {platform}
                           </Badge>
@@ -1010,12 +1031,12 @@ const ToolsPage = () => {
                     <div>
                       <p className="text-xs font-medium text-gray-900 mb-1">Features</p>
                       <div className="flex flex-wrap gap-1">
-                        {tool.features.slice(0, 3).map((feature) => (
+                        {(tool.features || []).slice(0, 3).map((feature) => (
                           <Badge key={feature} variant="outline" className="text-xs">
                             {feature}
                           </Badge>
                         ))}
-                        {tool.features.length > 3 && (
+                        {tool.features && tool.features.length > 3 && (
                           <Badge variant="outline" className="text-xs">
                             +{tool.features.length - 3} more
                           </Badge>
