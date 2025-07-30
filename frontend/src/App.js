@@ -919,7 +919,7 @@ const ToolsPage = () => {
                   <SelectValue placeholder="All categories" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All categories</SelectItem>
+                  <SelectItem value="all">All categories</SelectItem>
                   {categories && categories.length > 0 && categories.map((category) => (
                     <SelectItem key={category} value={category}>
                       {category}
@@ -935,7 +935,7 @@ const ToolsPage = () => {
                   <SelectValue placeholder="All platforms" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All platforms</SelectItem>
+                  <SelectItem value="all">All platforms</SelectItem>
                   <SelectItem value="Web">Web</SelectItem>
                   <SelectItem value="Desktop">Desktop</SelectItem>
                   <SelectItem value="Mobile">Mobile</SelectItem>
