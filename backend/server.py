@@ -459,6 +459,11 @@ async def get_user_favorites(current_user: User = Depends(get_current_user)):
     favorite_tools = await db.ai_tools.find({"id": {"$in": favorite_ids}}).to_list(100)
     return {"tools": [AITool(**tool) for tool in favorite_tools]}
 
+# Health check endpoint
+@api_router.get("/")
+async def root():
+    return {"message": "AI Tools Consulting API is running!", "status": "healthy"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
