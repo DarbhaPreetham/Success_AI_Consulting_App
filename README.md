@@ -162,21 +162,31 @@ successai-platform/
 
 ## 🎯 AI Tools Database
 
-The platform includes **16+ premium AI tools** across **6 categories**:
+The platform includes **14+ premium AI tools** across **6 categories**:
 
 ### 🧠 General AI (5 tools)
 - **ChatGPT** - OpenAI's conversational AI for content and coding
-- **Google Gemini** - Google's advanced multimodal AI model
+- **Google Gemini** - Google's advanced multimodal AI model  
 - **Grok AI** - Elon Musk's witty AI with real-time information
 - **Claude AI** - Anthropic's safety-focused AI with large context
 - **Meta AI** - Meta's AI integrated across social platforms
 
 ### 💻 Development (5 tools)
-- **Cursor AI** - AI-powered coding assistant with collaboration (https://cursor.com)
+- **Cursor AI** - AI-powered coding assistant (https://cursor.com) ✅
 - **GitHub Copilot** - AI pair programmer for faster coding
-- **Lovable** - Full-stack development platform with React
-- **Bolt.new** - Instant web application builder
-- **Emergent AI** - Advanced AI agent platform
+- **Lovable** - Full-stack development platform (https://lovable.dev) ✅
+- **Bolt.new** - Instant web application builder (https://bolt.new) ✅
+- **Emergent AI** - Advanced AI agent platform (https://app.emergent.sh) ✅
+
+### 🎨 Image Generation (2 tools)
+- **DALL-E 3** - OpenAI's advanced image generation
+- **Midjourney** - Artistic AI image creator
+
+### 🔍 Search & Research (1 tool)
+- **Perplexity AI** - AI-powered answer engine with citations (https://perplexity.ai) ✅
+
+### 🎨 Design & Creative (1 tool)
+- **Canva** - AI-powered design platform (https://canva.com) ✅
 
 ### 🎨 Image Generation (2 tools)
 - **DALL-E 3** - OpenAI's advanced image generation
