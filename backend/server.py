@@ -343,6 +343,13 @@ async def create_tool(tool: AIToolCreate, current_user: User = Depends(get_curre
     await db.ai_tools.insert_one(tool_obj.dict())
     return tool_obj
 
+@api_router.delete("/tools/{tool_id}")
+async def delete_tool(tool_id: str, current_user: User = Depends(get_current_user)):
+    result = await db.ai_tools.delete_one({"id": tool_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Tool not found")
+    return {"message": "Tool deleted successfully"}
+
 @api_router.get("/tools/{tool_id}", response_model=AITool)
 async def get_tool(tool_id: str):
     tool = await db.ai_tools.find_one({"id": tool_id})
