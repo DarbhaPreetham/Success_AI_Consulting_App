@@ -114,14 +114,39 @@ const LandingPage = () => {
     
     setIsSearching(true);
     try {
-      const response = await axios.post(`${API}/recommendations`, {
-        requirements: requirements,
-        preferred_platforms: [],
-        use_case: 'general'
-      });
-      setQuickRecommendations(response.data.tools.slice(0, 3));
+      // For guest users, we'll call the tools API directly and do client-side matching
+      if (!user) {
+        const response = await axios.get(`${API}/tools`);
+        const allTools = response.data || [];
+        
+        // Simple client-side matching for guest users
+        const keywordMatches = allTools.filter(tool => 
+          tool.name.toLowerCase().includes(requirements.toLowerCase()) ||
+          tool.description.toLowerCase().includes(requirements.toLowerCase()) ||
+          tool.category.toLowerCase().includes(requirements.toLowerCase()) ||
+          tool.tags.some(tag => tag.toLowerCase().includes(requirements.toLowerCase()))
+        ).slice(0, 3);
+        
+        setQuickRecommendations(keywordMatches);
+      } else {
+        // For authenticated users, use the AI recommendation endpoint
+        const response = await axios.post(`${API}/recommendations`, {
+          requirements: requirements,
+          preferred_platforms: [],
+          use_case: 'general'
+        });
+        setQuickRecommendations(response.data.tools.slice(0, 3));
+      }
     } catch (error) {
       console.error('Quick search failed:', error);
+      // Fallback: try to get some sample tools
+      try {
+        const response = await axios.get(`${API}/tools?limit=3`);
+        setQuickRecommendations(response.data || []);
+      } catch (fallbackError) {
+        console.error('Fallback search also failed:', fallbackError);
+        setQuickRecommendations([]);
+      }
     } finally {
       setIsSearching(false);
     }
