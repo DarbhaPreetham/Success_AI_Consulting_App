@@ -885,7 +885,7 @@ const ToolsPage = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="">All categories</SelectItem>
-                  {categories.map((category) => (
+                  {(categories || []).map((category) => (
                     <SelectItem key={category} value={category}>
                       {category}
                     </SelectItem>
