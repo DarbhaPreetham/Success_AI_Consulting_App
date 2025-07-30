@@ -785,8 +785,8 @@ const ToolsPage = () => {
   const [tools, setTools] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedPlatform, setSelectedPlatform] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedPlatform, setSelectedPlatform] = useState('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [favorites, setFavorites] = useState(new Set());
