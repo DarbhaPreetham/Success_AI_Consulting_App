@@ -976,7 +976,7 @@ const ToolsPage = () => {
               <Button onClick={() => setSearchTerm('')} variant="outline">
                 Clear Search
               </Button>
-              <Button onClick={() => {setSelectedCategory(''); setSelectedPlatform('');}} variant="outline">
+              <Button onClick={() => {setSelectedCategory('all'); setSelectedPlatform('all');}} variant="outline">
                 Clear Filters
               </Button>
             </div>
