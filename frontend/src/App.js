@@ -635,7 +635,9 @@ const Dashboard = () => {
             <Avatar className="w-8 h-8">
               <AvatarFallback>{user?.username?.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
-            <Button variant="outline" onClick={logout}>
+            <span className="text-sm font-medium">{user?.username}</span>
+            <Button variant="outline" onClick={logout} className="text-red-600 border-red-200 hover:bg-red-50">
+              <ExternalLinkIcon className="w-4 h-4 mr-2 rotate-180" />
               Logout
             </Button>
           </div>
