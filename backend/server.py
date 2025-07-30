@@ -156,7 +156,7 @@ async def init_sample_data():
                 "platforms": ["Web", "Desktop"],
                 "features": ["Code completion", "Real-time collaboration", "Debugging support", "Multi-language support"],
                 "pricing": "Freemium - $20/month for premium",
-                "url": "https://cursor.ai",
+                "url": "https://cursor.com",
                 "rating": 4.8,
                 "review_count": 150,
                 "tags": ["coding", "ai", "productivity", "development"],
