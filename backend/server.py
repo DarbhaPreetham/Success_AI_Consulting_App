@@ -12,7 +12,6 @@ import uuid
 from datetime import datetime, timedelta
 import jwt
 from passlib.context import CryptContext
-import openai
 from openai import OpenAI
 import json
 import asyncio
