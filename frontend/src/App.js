@@ -762,32 +762,40 @@ const ToolsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [favorites, setFavorites] = useState(new Set());
 
   useEffect(() => {
-    fetchCategories();
-    fetchTools();
-    if (user) {
-      fetchUserFavorites();
-    }
+    const initializePage = async () => {
+      setLoading(true);
+      await fetchCategories();
+      await fetchTools();
+      if (user) {
+        await fetchUserFavorites();
+      }
+      setLoading(false);
+    };
+    initializePage();
   }, []);
 
   useEffect(() => {
-    fetchTools();
+    if (!loading) {
+      fetchTools();
+    }
   }, [searchTerm, selectedCategory, selectedPlatform]);
 
   const fetchCategories = async () => {
     try {
       const response = await axios.get(`${API}/categories`);
-      setCategories(response.data.categories);
+      setCategories(response.data.categories || []);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
+      setCategories([]);
     }
   };
 
   const fetchTools = async () => {
-    setLoading(true);
     try {
       const params = new URLSearchParams();
       if (searchTerm) params.append('search', searchTerm);
@@ -795,11 +803,12 @@ const ToolsPage = () => {
       if (selectedPlatform) params.append('platform', selectedPlatform);
 
       const response = await axios.get(`${API}/tools?${params}`);
-      setTools(response.data);
+      setTools(response.data || []);
+      setError('');
     } catch (error) {
       console.error('Failed to fetch tools:', error);
-    } finally {
-      setLoading(false);
+      setError('Failed to load tools. Please try again.');
+      setTools([]);
     }
   };
 
@@ -810,6 +819,7 @@ const ToolsPage = () => {
       setFavorites(favoriteIds);
     } catch (error) {
       console.error('Failed to fetch favorites:', error);
+      setFavorites(new Set());
     }
   };
 
