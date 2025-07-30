@@ -172,7 +172,7 @@ The platform includes **16+ premium AI tools** across **6 categories**:
 - **Meta AI** - Meta's AI integrated across social platforms
 
 ### 💻 Development (5 tools)
-- **Cursor AI** - AI-powered coding assistant with collaboration
+- **Cursor AI** - AI-powered coding assistant with collaboration (https://cursor.com)
 - **GitHub Copilot** - AI pair programmer for faster coding
 - **Lovable** - Full-stack development platform with React
 - **Bolt.new** - Instant web application builder
