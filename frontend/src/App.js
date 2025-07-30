@@ -895,7 +895,7 @@ const ToolsPage = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="">All categories</SelectItem>
-                  {(categories || []).map((category) => (
+                  {categories && categories.length > 0 && categories.map((category) => (
                     <SelectItem key={category} value={category}>
                       {category}
                     </SelectItem>
@@ -919,6 +919,11 @@ const ToolsPage = () => {
               </Select>
             </div>
           </div>
+          {error && (
+            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          )}
         </div>
 
         {/* Tools Grid */}
