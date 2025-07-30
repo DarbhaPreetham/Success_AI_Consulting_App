@@ -824,8 +824,8 @@ const ToolsPage = () => {
     try {
       const params = new URLSearchParams();
       if (searchTerm) params.append('search', searchTerm);
-      if (selectedCategory) params.append('category', selectedCategory);
-      if (selectedPlatform) params.append('platform', selectedPlatform);
+      if (selectedCategory && selectedCategory !== 'all') params.append('category', selectedCategory);
+      if (selectedPlatform && selectedPlatform !== 'all') params.append('platform', selectedPlatform);
 
       const response = await axios.get(`${API}/tools?${params}`);
       setTools(response.data || []);
