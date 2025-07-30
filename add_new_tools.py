@@ -99,14 +99,14 @@ new_tools = [
         "tags": ["design", "graphics", "templates", "ai generation", "creative"]
     },
     {
-        "name": "Loveable AI",
-        "description": "AI-powered full-stack development platform that builds complete applications from simple prompts with modern frameworks",
+        "name": "Lovable",
+        "description": "AI-powered full-stack development platform that builds complete applications from simple prompts with modern React frameworks",
         "category": "Development",
         "platforms": ["Web"],
-        "features": ["Full-stack generation", "React applications", "Database integration", "Modern frameworks", "Deployment ready"],
-        "pricing": "Subscription-based - Contact for pricing",
-        "url": "https://loveable.ai",
-        "tags": ["development", "full-stack", "react", "ai generation", "deployment"]
+        "features": ["Full-stack generation", "React applications", "Database integration", "Modern frameworks", "Instant deployment"],
+        "pricing": "Free tier available - Premium plans from $20/month",
+        "url": "https://lovable.dev",
+        "tags": ["development", "full-stack", "react", "ai generation", "lovable"]
     },
     {
         "name": "Bolt.new",
